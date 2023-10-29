@@ -24,6 +24,7 @@ while True:
 
     elif action not in COMMAND_LIST_MSG: 
         print("Please select the command in the list.")
+        print(50 * "-")
 
     elif action == "purchase":
         purchase_name = input("Adding the purchase item (name): ")
@@ -45,22 +46,22 @@ while True:
              print(f"{sale_name} not present in the inventory")
          else: 
              inventory[sale_name]["quantity"] -= sale_quantity
+             inventory[sale_name]["price"] = sale_price
     
     elif action == "list":
-        print(f"Purchase: {purchase_name}| Quantity: {purchase_quantity} | Price: {purchase_price}")
-        print(f"Sale: {sale_name} | Quantity: {sale_quantity} | Price: {sale_price}")
-        # display all the element in the product (inventory) * for look 
+        for name in inventory:
+            quantity = inventory[name]["quantity"]
+            price = inventory[name]["price"]
+            print(f"Product name: {name}| Quantity: {quantity} | Price: {price}")
     
     elif action == "warehouse":
         name = input("Enter the product name: ")
         if name not in inventory:
             print(f"{name}: not found.")
         else: 
-            quantity = inventory[name]["quantity"]
-            price = inventory[name]["price"]
             print(f" Product name: {name}")
-            print (f" Product quantity after sale: {quantity}")
-            print(f" Purchase price:  {price}")
+            print(f" Quantity: {quantity}")
+            print(f" Price:  {price}")
 
     elif action == "balance":
         name = input("Enter the product name: ")
