@@ -112,4 +112,3 @@ while True:
 
         for i in history [from_value:to_value]: 
             print(i)
-            
