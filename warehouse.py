@@ -24,40 +24,42 @@ while True:
 
     if action == "quit":
         print("Exiting the program...")
-        break 
+        break
 
     elif action not in COMMAND_LIST_MSG: 
         print("Please select the command in the list.")
         print(50 * "-")
 
     elif action == "purchase":
-        purchase_name = input("Adding the purchase item (name): ")
-        purchase_price = float(input(f"Please enter the {purchase_name} price: "))
-        purchase_quantity = float(input(f"Please enter the {purchase_name} quantities: "))
+        pname = input("Adding the purchase item (name): ")
+        pquantity = float(input(f"Please enter the {pname} quantities: "))
+        pprice = float(input(f"Please enter the {pname} unit price: "))
+        purchase = pprice * pquantity
+        business_account -= purchase
+        if pname not in inventory:
+            inventory[pname] = {"quantity": 0.0, "quantity": 0}
+            
+            inventory[pname] ["quantity"] += pquantity
+            inventory[pname]["price"] = pprice
 
-        if purchase_name not in inventory:
-            inventory[purchase_name] = {"quantity": 0.0, "quantity": 0}
-
-        inventory[purchase_name] ["quantity"] += purchase_quantity
-        inventory[purchase_name]["price"] = purchase_price
-        
-        print(50 * "-")
-        history.append(f"Purchase name: {purchase_name}, purchase price: {purchase_price}, purcchase quantity: {purchase_quantity}")
+            print(50 * "-")
+            history.append(f"Purchase name: {pname}, purchase price: {pprice}, purcchase quantity: {pquantity}")
 
     elif action == "sale":
-         sale_name = input("Please enter the sale item name: ")
-         sale_price = float(input(f"Please enter the {sale_name} price: "))
-         sale_quantity = float(input(f"Please enter the {sale_name} quantities: "))
-         print(50 * "-")
-         if sale_name not in inventory or inventory[sale_name]["quantity"] < 1: 
-             print(f"{sale_name} not present in the inventory")
-         else: 
-             inventory[sale_name]["quantity"] -= sale_quantity
-             inventory[sale_name]["price"] = sale_price
-             
-             print(50 * "-")
-             history.append(f"sale name: {sale_name}, purchase price: {sale_price}, purcchase quantity: {sale_quantity}")
+        sname = input("Please enter the sale item name: ")
+        squantity = float(input(f"Please enter the {sname} quantities: "))
+        sprice = float(input(f"Please enter the {sname} price: "))
+        sale = sprice * squantity
+        business_account += sale
+        print(50 * "-")
+        if sname not in inventory or inventory[sname]["quantity"] < 1: 
+            print(f"{sname} not present in the inventory")
+        else:
+            inventory[sname]["quantity"] -= squantity
+            inventory[sname]["price"] = sprice
 
+            print(50 * "-")
+            history.append(f"sale name: {sname}, purchase price: {sprice}, purcchase quantity: {squantity}")
 
     elif action == "list":
         for name in inventory:
@@ -79,7 +81,7 @@ while True:
         amount = float(input("Enter an amount: "))
         print(50 * "-")
         if balance_command == "add":
-            business_account += amount 
+            business_account += amount
             if balance_command not in balance:
                 balance[balance_command] = {"amount": 0.0, "amount": 0}
                 balance[balance_command] ["amount"] += 1
@@ -95,8 +97,8 @@ while True:
                 if balance_command not in balance:
                     balance[balance_command] = {"amount": 0.0, "amount": 0}
                     balance[balance_command] ["amount"] -= 1
-                    
-                    history.append(f"balance subtract the amount {amount}")
+                
+                history.append(f"balance subtract the amount {amount}")
 
                 print(50 * "-")
         else:
@@ -110,5 +112,15 @@ while True:
         from_value = int(input("Please enter the 'from' value: "))
         to_value = int (input("Please enter the 'to value': "))
 
-        for i in history [from_value:to_value]: 
-            print(i)
+        if from_value == "" and to_value == "":
+            for i in history [from_value:to_value]: 
+                print(i)
+        elif from_value !="" and to_value =="":
+            for i in history[int(from_value)-1:]:
+                print(i)
+        elif from_value =="" and to_value !="":
+            for i in history[int(from_value)+1:]:
+                print(i)
+        else: 
+            for i in history[int(from_value)-1:int(to_value)]:
+                print(i)
