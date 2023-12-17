@@ -1,3 +1,5 @@
+import warehouse_import
+
 COMMAND_LIST_MSG= """Available commands: 
 - purchase
 - sale
