@@ -22,3 +22,5 @@ sale, tomatoes, 100, 9
 
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process 
 .venv\Scripts\activate
+
+Get-Content .\test_files\text_add.txt | python .\warehouse.py
