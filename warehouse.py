@@ -1,3 +1,14 @@
+from warehouse_import import save_inventory
+from warehouse_import import load_inventory
+
+from warehouse_import import save_history
+from warehouse_import import load_history
+
+from warehouse_import import save_balance
+from warehouse_import import load_balance
+
+name = input("Enter your account name: ")
+
 COMMAND_LIST_MSG= """Available commands: 
 - purchase
 - sale
@@ -8,10 +19,10 @@ COMMAND_LIST_MSG= """Available commands:
 - review 
 - quit: exit the program 
 """
-inventory = {}
-balance = {}
-business_account = 0 
-history = []
+inventory = load_inventory(name)
+history = load_history(name)
+balance = load_balance(name)
+business_account = 0
 
 while True: 
     print(COMMAND_LIST_MSG)
@@ -124,3 +135,7 @@ while True:
         else: 
             for i in history[int(from_value)-1:int(to_value)]:
                 print(i)
+
+save_inventory(inventory, name)
+save_history(history, name)
+save_balance(balance, name)
