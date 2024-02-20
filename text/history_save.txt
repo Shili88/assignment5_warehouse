@@ -1,0 +1,4 @@
+add 5000000.0 to the account balance
+. format(self.history)Purchase tomatoes for 100.0 with total purchase price 100.0, balance changed to 4999900.0
+. format(self.history)Purchase phone for 10.0 with total purchase price 500.0, balance changed to 4999890.0
+. format(self.history)
